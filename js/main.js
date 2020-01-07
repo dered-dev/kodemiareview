@@ -3,7 +3,7 @@
  * GET, POST, PUT, PATCH, DELETE
  */
 
-const SERVER_URL = 'https://ajaxkode.firebaseio.com/.json'
+const SERVER_URL = 'https://ajaxkode.firebaseio.com'
 const SERVER_URLKODERS = `${SERVER_URL}/koders.json`
 
 
@@ -27,7 +27,7 @@ const request = (url, callback, method = 'GET', data = {}) => {
   }
 }
 const renderCards = () =>{
-  request('https://ajaxkode.firebaseio.com/koders.json', buildPostCards);
+  request(SERVER_URLKODERS, buildPostCards);
   document.getElementById("closeForm").click();
 }
 
@@ -45,7 +45,7 @@ const buildPostCards = (nodes, parent = 'listCards') => {
     accNodes += `
       <div class="col-12 col-md-4 p-2">
         <div class="card ">
-          <img src="https://picsum.photos/600/350?random=1" class="d-block w-100" alt="...">
+          <img src="https://picsum.photos/600/300?random=1" class="d-block w-100" alt="...">
           <div class="card-body">
             <h5 class="card-title">${title}</h5>
             <p class="card-text">${text}</p>
@@ -60,7 +60,7 @@ const buildPostCards = (nodes, parent = 'listCards') => {
 }
 
 window.addEventListener("load", function(event) {
-  request('https://ajaxkode.firebaseio.com/koders.json', buildPostCards)
+  request(SERVER_URLKODERS, buildPostCards)
 });
 
 
@@ -77,7 +77,7 @@ sendFormTrigger.addEventListener('click', function(e){
     'text': text,
     'date': date,
   }
-  request( "https://ajaxkode.firebaseio.com/koders.json", renderCards, "POST", newKoder)
+  request( SERVER_URLKODERS, renderCards, "POST", newKoder)
   window.scrollTo(0,document.body.scrollHeight);
 })
 
