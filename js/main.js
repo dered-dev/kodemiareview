@@ -26,6 +26,10 @@ const request = (url, callback, method = 'GET', data = {}) => {
     xhttp.send()
   }
 }
+const renderCards = () =>{
+  request('https://ajaxkode.firebaseio.com/koders.json', buildPostCards);
+  document.getElementById("closeForm").click();
+}
 
 
 // Function buildPostCards
@@ -55,7 +59,10 @@ const buildPostCards = (nodes, parent = 'listCards') => {
   parentNode.innerHTML = accNodes
 }
 
-request('https://ajaxkode.firebaseio.com/koders.json', buildPostCards)
+window.addEventListener("load", function(event) {
+  request('https://ajaxkode.firebaseio.com/koders.json', buildPostCards)
+});
+
 
 
 // Add new koder
@@ -70,6 +77,11 @@ sendFormTrigger.addEventListener('click', function(e){
     'text': text,
     'date': date,
   }
-  request( "https://ajaxkode.firebaseio.com/koders.json", response => console.log(response),"POST", newKoder)
+  request( "https://ajaxkode.firebaseio.com/koders.json", renderCards, "POST", newKoder)
+  window.scrollTo(0,document.body.scrollHeight);
 })
+
+
+
+
 
